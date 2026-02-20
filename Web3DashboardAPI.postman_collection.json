@@ -1,0 +1,153 @@
+{
+  "info": {
+    "_postman_id": "web3-dashboard-api",
+    "name": "Web3 Dashboard API",
+    "description": "API collection for testing Ethereum wallet and token operations",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/health",
+          "host": ["{{base_url}}"],
+          "path": ["api", "health"]
+        },
+        "description": "Check if API is running"
+      }
+    },
+    {
+      "name": "Add Wallet",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"address\": \"0x742d35Cc6634C0532925a3b844Bc9e7595f42e61\",\n  \"name\": \"My Sepolia Wallet\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/wallets/add",
+          "host": ["{{base_url}}"],
+          "path": ["api", "wallets", "add"]
+        },
+        "description": "Add a new wallet to track. The address must be a valid Ethereum address."
+      }
+    },
+    {
+      "name": "Get Wallet",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/wallets/0x742d35Cc6634C0532925a3b844Bc9e7595f42e61",
+          "host": ["{{base_url}}"],
+          "path": ["api", "wallets", "0x742d35Cc6634C0532925a3b844Bc9e7595f42e61"]
+        },
+        "description": "Get wallet details including ETH and token balances"
+      }
+    },
+    {
+      "name": "Get Wallet Balance",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/wallets/0x742d35Cc6634C0532925a3b844Bc9e7595f42e61/balance",
+          "host": ["{{base_url}}"],
+          "path": ["api", "wallets", "0x742d35Cc6634C0532925a3b844Bc9e7595f42e61", "balance"]
+        },
+        "description": "Get just the balance information for a wallet"
+      }
+    },
+    {
+      "name": "Sync Wallet",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/wallets/0x742d35Cc6634C0532925a3b844Bc9e7595f42e61/sync",
+          "host": ["{{base_url}}"],
+          "path": ["api", "wallets", "0x742d35Cc6634C0532925a3b844Bc9e7595f42e61", "sync"]
+        },
+        "description": "Refresh wallet balances by fetching latest data from blockchain"
+      }
+    },
+    {
+      "name": "Add Token to Wallet",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/wallets/0x742d35Cc6634C0532925a3b844Bc9e7595f42e61/tokens/add?tokenAddress=0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
+          "host": ["{{base_url}}"],
+          "path": ["api", "wallets", "0x742d35Cc6634C0532925a3b844Bc9e7595f42e61", "tokens", "add"],
+          "query": [
+            {
+              "key": "tokenAddress",
+              "value": "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
+              "description": "USDC token on Sepolia"
+            }
+          ]
+        },
+        "description": "Add an ERC20 token to track for a wallet. This example uses USDC on Sepolia."
+      }
+    },
+    {
+      "name": "Add WETH Token",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/wallets/0x742d35Cc6634C0532925a3b844Bc9e7595f42e61/tokens/add?tokenAddress=0x7b79995e5f793a07bc00c21412e50ecae098e7f9",
+          "host": ["{{base_url}}"],
+          "path": ["api", "wallets", "0x742d35Cc6634C0532925a3b844Bc9e7595f42e61", "tokens", "add"],
+          "query": [
+            {
+              "key": "tokenAddress",
+              "value": "0x7b79995e5f793a07bc00c21412e50ecae098e7f9",
+              "description": "WETH (Wrapped ETH) on Sepolia"
+            }
+          ]
+        },
+        "description": "Add Wrapped ETH token to track"
+      }
+    },
+    {
+      "name": "Get Transaction History",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/wallets/0x742d35Cc6634C0532925a3b844Bc9e7595f42e61/transactions?limit=50",
+          "host": ["{{base_url}}"],
+          "path": ["api", "wallets", "0x742d35Cc6634C0532925a3b844Bc9e7595f42e61", "transactions"],
+          "query": [
+            {
+              "key": "limit",
+              "value": "50",
+              "description": "Maximum number of transactions to return (default 50, max 1000)"
+            }
+          ]
+        },
+        "description": "Get transaction history for a wallet"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000",
+      "type": "string",
+      "description": "Base URL of the API. Change to your server URL in production."
+    }
+  ]
+}

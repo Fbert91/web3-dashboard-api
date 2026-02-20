@@ -1,0 +1,39 @@
+# C# / .NET
+bin/
+obj/
+.vs/
+*.user
+*.suo
+.vscode/
+packages/
+.nuget/
+*.nupkg
+*.snupkg
+.env.local
+appsettings.local.json
+
+# Web3 / Blockchain
+.env
+.env.local
+private_keys/
+wallet_files/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.nyc_output/
+coverage/
